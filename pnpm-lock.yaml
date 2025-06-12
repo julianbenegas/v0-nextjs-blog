@@ -96,8 +96,8 @@ importers:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.5.0)
       basehub:
-        specifier: 9.0.0-schemaless.2
-        version: 9.0.0-schemaless.2(@babel/runtime@7.27.6)(@types/react@19.0.0)(react@19.0.0)(typescript@5.0.2)
+        specifier: 9.0.0-schemaless.3
+        version: 9.0.0-schemaless.3(@babel/runtime@7.27.6)(@types/react@19.0.0)(react@19.0.0)(typescript@5.0.2)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -1409,8 +1409,8 @@ packages:
     resolution: {integrity: sha512-vjtV3hiLqYDNRoiAv0zC4QaGAMPomEoq83PRmYIofPswwZurCeWR5LByXm7SyoL0Zh5+2z0+HC7jG8gSZJUh0w==}
     engines: {node: '>= 16'}
 
-  basehub@9.0.0-schemaless.2:
-    resolution: {integrity: sha512-7yyNKDvDYy5YvWEMJN4onHkZPSqAAcfkexE3EIACO/rqBl1JCRpg9ttiWpOh6y6dvHH6Sh5L5eRemEvHYr1EtQ==}
+  basehub@9.0.0-schemaless.3:
+    resolution: {integrity: sha512-piLHaTpixsJ4/HUXnXbw1yeyyJx8LdqevsY0PrneF5koJlEhUHrgbwCpWJQcUtX+rMfVxGNrWAqFPzTOQnCcMA==}
     hasBin: true
 
   binary-extensions@2.3.0:
@@ -4088,7 +4088,7 @@ snapshots:
 
   balanced-match@3.0.1: {}
 
-  basehub@9.0.0-schemaless.2(@babel/runtime@7.27.6)(@types/react@19.0.0)(react@19.0.0)(typescript@5.0.2):
+  basehub@9.0.0-schemaless.3(@babel/runtime@7.27.6)(@types/react@19.0.0)(react@19.0.0)(typescript@5.0.2):
     dependencies:
       '@basehub/genql': 9.0.0-canary.13
       '@radix-ui/react-slot': 1.1.1(@types/react@19.0.0)(react@19.0.0)
