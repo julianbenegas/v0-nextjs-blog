@@ -3,7 +3,10 @@ import { Intro } from "./components/intro";
 import { HeroPost, PostMetaFragment } from "./components/hero-post";
 import { MoreStories } from "./components/more-stories";
 
+console.log(JSON.stringify(process.env, null,2))
+
 export default async function Page() {
+  
   return (
     <Pump
       queries={[
