@@ -7,8 +7,14 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "assets.basehub.com",
+      },
+    ],
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
