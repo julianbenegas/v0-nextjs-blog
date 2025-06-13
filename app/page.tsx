@@ -4,8 +4,6 @@ import { HeroPost, PostMetaFragment } from "./components/hero-post"
 import { MoreStories } from "./components/more-stories"
 import { Newsletter } from "./components/newsletter"
 
-console.log("process.env.BASEHUB_TOKEN",process.env.BASEHUB_TOKEN)
-
 export default async function Page() {
   return (
     <Pump
