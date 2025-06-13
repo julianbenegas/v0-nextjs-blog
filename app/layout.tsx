@@ -6,6 +6,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: `BaseHub x v0 Example`,
   description: `This is a blog built with BaseHub and v0.`,
+    generator: 'v0.dev'
 };
 
 export default function RootLayout({

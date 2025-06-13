@@ -1,12 +1,12 @@
-import { Pump } from "basehub/react-pump";
-import { Intro } from "./components/intro";
-import { HeroPost, PostMetaFragment } from "./components/hero-post";
-import { MoreStories } from "./components/more-stories";
+import { Pump } from "basehub/react-pump"
+import { Intro } from "./components/intro"
+import { HeroPost, PostMetaFragment } from "./components/hero-post"
+import { MoreStories } from "./components/more-stories"
+import { Newsletter } from "./components/newsletter"
 
-console.log(JSON.stringify(process.env, null,2))
+console.log("process.env.BASEHUB_TOKEN",process.env.BASEHUB_TOKEN)
 
 export default async function Page() {
-  
   return (
     <Pump
       queries={[
@@ -17,15 +17,20 @@ export default async function Page() {
               __args: { orderBy: "date__DESC" },
               items: PostMetaFragment,
             },
+            newsletter: {
+              ingestKey: true,
+              schema: true,
+            },
           },
         },
       ]}
     >
       {async ([{ blog }]) => {
-        "use server";
+        "use server"
 
-        const heroPost = blog.posts.items[0];
-        const morePosts = blog.posts.items.slice(1);
+        const heroPost = blog.posts.items[0]
+        const morePosts = blog.posts.items.slice(1)
+        const newsletter = blog.newsletter
 
         return (
           <main>
@@ -34,9 +39,10 @@ export default async function Page() {
               {heroPost && <HeroPost {...heroPost} />}
               <MoreStories morePosts={morePosts} title={blog.morePosts} />
             </section>
+            <Newsletter newsletter={newsletter} />
           </main>
-        );
+        )
       }}
     </Pump>
-  );
+  )
 }
