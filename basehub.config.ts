@@ -2,7 +2,7 @@ import { setGlobalConfig } from "basehub"
 
 const playgroundId = process.env.VERCEL_URL
   ? encodeURIComponent(process.env.VERCEL_URL)
-  : undefined
+  : "__dev"
 
 setGlobalConfig({
   fallbackPlayground: playgroundId
