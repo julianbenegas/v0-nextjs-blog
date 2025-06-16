@@ -1,26 +1,26 @@
-import Link from "next/link";
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { basehub } from "basehub";
-import { Pump } from "basehub/react-pump";
-import { Post, PostFragment } from "@/app/components/post";
-import { MoreStories } from "@/app/components/more-stories";
-import { PostMetaFragment } from "@/app/components/hero-post";
+import Link from "next/link"
+import { Metadata } from "next"
+import { notFound } from "next/navigation"
+import { basehub } from "basehub"
+import { Pump } from "basehub/react-pump"
+import { Post, PostFragment } from "@/app/components/post"
+import { MoreStories } from "@/app/components/more-stories"
+import { PostMetaFragment } from "@/app/components/hero-post"
 
 export async function generateStaticParams() {
   const data = await basehub().query({
     blog: { posts: { items: { _slug: true } } },
-  });
+  })
 
-  return data.blog.posts.items.map((post) => ({ slug: post._slug }));
+  return data.blog.posts.items.map((post) => ({ slug: post._slug }))
 }
 
-type PageProps = { params: Promise<{ slug: string }> };
+type PageProps = { params: Promise<{ slug: string }> }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = await params
   const postData = await basehub().query({
     blog: {
       posts: {
@@ -28,18 +28,18 @@ export async function generateMetadata({
         items: PostMetaFragment,
       },
     },
-  });
-  const [post] = postData.blog.posts.items;
-  if (!post) notFound();
+  })
+  const [post] = postData.blog.posts.items
+  if (!post) notFound()
 
   return {
     title: `Post / ${post._title}`,
     description: post.excerpt,
-  };
+  }
 }
 
 export default async function PostPage({ params }: PageProps) {
-  const { slug } = await params;
+  const { slug } = await params
   return (
     <Pump
       queries={[
@@ -67,10 +67,10 @@ export default async function PostPage({ params }: PageProps) {
       ]}
     >
       {async ([postData, morePostsData]) => {
-        "use server";
+        "use server"
 
-        const [post] = postData.blog.posts.items;
-        if (!post) notFound();
+        const [post] = postData.blog.posts.items
+        if (!post) notFound()
 
         return (
           <main>
@@ -88,8 +88,8 @@ export default async function PostPage({ params }: PageProps) {
               />
             </section>
           </main>
-        );
+        )
       }}
     </Pump>
-  );
+  )
 }
