@@ -1,13 +1,14 @@
-import { Toolbar } from "basehub/next-toolbar";
-import type { Metadata } from "next";
-import Footer from "./components/footer";
-import "./globals.css";
+import { Toolbar } from "basehub/next-toolbar"
+import type { Metadata } from "next"
+import Footer from "./components/footer"
+import "./globals.css"
+import "../basehub.config"
 
 export const metadata: Metadata = {
   title: `BaseHub x v0 Example`,
   description: `This is a blog built with BaseHub and v0.`,
-    generator: 'v0.dev'
-};
+  generator: "v0.dev",
+}
 
 export default function RootLayout({
   children,
@@ -22,5 +23,5 @@ export default function RootLayout({
         </main>
       </body>
     </html>
-  );
+  )
 }
