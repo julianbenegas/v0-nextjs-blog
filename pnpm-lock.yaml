@@ -12,8 +12,8 @@ importers:
         specifier: latest
         version: 1.2.3(@types/react@19.0.0)(react@19.0.0)
       basehub:
-        specifier: 9.0.0-schemaless.21
-        version: 9.0.0-schemaless.21(@babel/runtime@7.27.6)(@types/react@19.0.0)(react@19.0.0)(typescript@5.0.2)
+        specifier: 9.0.0-schemaless.22
+        version: 9.0.0-schemaless.22(@babel/runtime@7.27.6)(@types/react@19.0.0)(react@19.0.0)(typescript@5.0.2)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -606,8 +606,8 @@ packages:
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  basehub@9.0.0-schemaless.21:
-    resolution: {integrity: sha512-uui9c983cm5RINdl0r0zf6BDln9ARegjuVmxGCv1MtSoNpTCT0hr6Nn35wZ1pjLeU7zCMe4GGHSFju/L/7bv6g==}
+  basehub@9.0.0-schemaless.22:
+    resolution: {integrity: sha512-GjGJd47KHlPa61lWYfEmMFAMPm/g0wyo4QA6ORhlncfX2NQUUyW7SgRN+z1lYur8WP32/iFdkdFPnOkjWGOSgg==}
     hasBin: true
 
   binary-extensions@2.3.0:
@@ -2303,7 +2303,7 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
-  basehub@9.0.0-schemaless.21(@babel/runtime@7.27.6)(@types/react@19.0.0)(react@19.0.0)(typescript@5.0.2):
+  basehub@9.0.0-schemaless.22(@babel/runtime@7.27.6)(@types/react@19.0.0)(react@19.0.0)(typescript@5.0.2):
     dependencies:
       '@basehub/genql': 9.0.0-canary.13
       '@radix-ui/react-slot': 1.2.3(@types/react@19.0.0)(react@19.0.0)
