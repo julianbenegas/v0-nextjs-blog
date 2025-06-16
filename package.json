@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "latest",
-    "basehub": "9.0.0-schemaless.20",
+    "basehub": "9.0.0-schemaless.21",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "latest",
