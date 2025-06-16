@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "basehub": "9.0.0-schemaless.12",
+    "basehub": "9.0.0-schemaless.13",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "latest",
