@@ -13,7 +13,9 @@ export const metadata: Metadata = {
   generator: "v0.dev",
 }
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body>
@@ -33,19 +35,17 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           {async ([{ _sys }]) => {
             "use server"
-            console.log(JSON.stringify(_sys))
 
+            if (!_sys.playgroundInfo) return null
             return (
-              <>
-                {_sys.playgroundInfo && <PlaygroundNotification playgroundInfo={_sys.playgroundInfo} />}
-                <main className="min-h-screen">
-                  {children}
-                  <Footer />
-                </main>
-              </>
+              <PlaygroundNotification playgroundInfo={_sys.playgroundInfo} />
             )
           }}
         </Pump>
+        <main className="min-h-screen">
+          {children}
+          <Footer />
+        </main>
       </body>
     </html>
   )
