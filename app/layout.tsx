@@ -6,6 +6,8 @@ import Footer from "./components/footer"
 import { PlaygroundNotification } from "./components/playground-notification"
 import "./globals.css"
 import "../basehub.config"
+import { ThemeProvider } from "@/components/theme-provider"
+import { Header } from "./components/header"
 
 export const metadata: Metadata = {
   title: `BaseHub x v0 Example`,
@@ -13,39 +15,38 @@ export const metadata: Metadata = {
   generator: "v0.dev",
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body>
-        <Toolbar />
-        <Pump
-          queries={[
-            {
-              _sys: {
-                playgroundInfo: {
-                  expiresAt: true,
-                  editUrl: true,
-                  claimUrl: true,
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <Toolbar />
+          <Pump
+            queries={[
+              {
+                _sys: {
+                  playgroundInfo: {
+                    expiresAt: true,
+                    editUrl: true,
+                    claimUrl: true,
+                  },
                 },
               },
-            },
-          ]}
-        >
-          {async ([{ _sys }]) => {
-            "use server"
+            ]}
+          >
+            {async ([{ _sys }]) => {
+              "use server"
 
-            if (!_sys.playgroundInfo) return null
-            return (
-              <PlaygroundNotification playgroundInfo={_sys.playgroundInfo} />
-            )
-          }}
-        </Pump>
-        <main className="min-h-screen">
-          {children}
-          <Footer />
-        </main>
+              if (!_sys.playgroundInfo) return null
+              return <PlaygroundNotification playgroundInfo={_sys.playgroundInfo} />
+            }}
+          </Pump>
+          <Header />
+          <main className="min-h-screen">
+            {children}
+            <Footer />
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   )

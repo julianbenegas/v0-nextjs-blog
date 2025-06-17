@@ -33,7 +33,7 @@ export function PlaygroundNotification({ playgroundInfo }: PlaygroundNotificatio
   }
 
   return (
-    <div className="sticky top-0 z-50 bg-orange-100 dark:bg-orange-900/20 border-b border-orange-200 dark:border-orange-800">
+    <div className="bg-orange-100 dark:bg-orange-900/20 border-b border-orange-200 dark:border-orange-800">
       <div className="container mx-auto px-5 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4 text-sm">
