@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Metadata } from "next"
+import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { basehub } from "basehub"
 import { Pump } from "basehub/react-pump"
@@ -17,24 +17,59 @@ export async function generateStaticParams() {
 
 type PageProps = { params: Promise<{ slug: string }> }
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
   const postData = await basehub().query({
+    meta: {
+      title: true
+    },
     blog: {
       posts: {
         __args: { first: 1, filter: { _sys_slug: { eq: slug } } },
-        items: PostMetaFragment,
+        items: {
+          ...PostMetaFragment,
+          meta: {
+            title: true,
+            description: true,
+            ogImage: {
+              url: true,
+            },
+          },
+        },
       },
     },
   })
   const [post] = postData.blog.posts.items
   if (!post) notFound()
 
+  const postTitle = post._title
+  const postDescription = post.excerpt
+  const postOgImage = post.coverImage?.url
+  const siteTitle = postData.meta?.title || `BaseHub x v0 Example`
+
   return {
-    title: `Post / ${post._title}`,
-    description: post.excerpt,
+    title: `${postTitle} | ${siteTitle}`,
+    description: postDescription,
+    openGraph: {
+      title: postTitle,
+      description: postDescription,
+      images: postOgImage
+        ? [
+            {
+              url: postOgImage,
+              width: 1200,
+              height: 630,
+              alt: postTitle,
+            },
+          ]
+        : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: postTitle,
+      description: postDescription,
+      images: postOgImage ? [postOgImage] : [],
+    },
   }
 }
 
@@ -82,10 +117,7 @@ export default async function PostPage({ params }: PageProps) {
               </h2>
               <Post {...post} />
               <hr className="mt-28 mb-24" />
-              <MoreStories
-                morePosts={morePostsData.blog.posts.items}
-                title={postData.blog.morePosts}
-              />
+              <MoreStories morePosts={morePostsData.blog.posts.items} title={postData.blog.morePosts} />
             </section>
           </main>
         )
