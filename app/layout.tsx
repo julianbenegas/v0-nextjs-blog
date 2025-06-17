@@ -84,7 +84,3 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     </html>
   )
 }
-
-export const metadata = {
-      generator: 'v0.dev'
-    };
