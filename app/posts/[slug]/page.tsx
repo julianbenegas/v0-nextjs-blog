@@ -26,15 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     blog: {
       posts: {
         __args: { first: 1, filter: { _sys_slug: { eq: slug } } },
-        items: {
-          ...PostMetaFragment,
-          meta: {
-            title: true,
-            description: true,
-            ogImage: {
-              url: true,
-            },
-          },
+        items: PostMetaFragment
         },
       },
     },
