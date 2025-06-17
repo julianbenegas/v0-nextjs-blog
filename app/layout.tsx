@@ -43,7 +43,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: data.meta?.title || `BaseHub x v0 Example`,
       description: data.meta?.description || `This is a blog built with BaseHub and v0.`,
-      images: data.meta?.ogImage?.url ? [data.blog.meta.ogImage.url] : [],
+      images: data.meta?.ogImage?.url ? [data.meta.ogImage.url] : [],
     },
   }
 }

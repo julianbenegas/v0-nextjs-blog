@@ -21,13 +21,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params
   const postData = await basehub().query({
     meta: {
-      title: true
+      title: true,
     },
     blog: {
       posts: {
         __args: { first: 1, filter: { _sys_slug: { eq: slug } } },
-        items: PostMetaFragment
-        },
+        items: PostMetaFragment,
       },
     },
   })
