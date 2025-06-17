@@ -4,6 +4,8 @@ import { HeroPost, PostMetaFragment } from "./components/hero-post"
 import { MoreStories } from "./components/more-stories"
 import { Newsletter } from "./components/newsletter"
 
+export const dynamic = "force-static"
+
 export default async function Page() {
   return (
     <Pump
@@ -16,12 +18,12 @@ export default async function Page() {
               items: PostMetaFragment,
             },
           },
-            newsletter: {
-              subscribers: {
-                ingestKey: true,
-                schema: true,
-              },
+          newsletter: {
+            subscribers: {
+              ingestKey: true,
+              schema: true,
             },
+          },
         },
       ]}
     >

@@ -61,6 +61,12 @@ export interface Scalars {
     String: string,
     bshb_event__530312905: `bshb_event__530312905:${string}`,
     schema_bshb_event__530312905: {email: string;},
+    bshb_workflow_218139063: `bshb_workflow_218139063:${string}`,
+    schema_bshb_workflow_218139063: { timestamp: string, type: 'list-block.created', data: {
+  listBlockId: string;
+  listBlockTitle?: string;
+  blockId: string
+} },
 }
 
 export type AnalyticsKeyScope = 'query' | 'send'
@@ -136,7 +142,7 @@ export interface BlockColor {
     __typename: 'BlockColor'
 }
 
-export type BlockDocument = (Authors | AuthorsItem | Blog | Posts | PostsItem | authorsItem_AsList | postsItem_AsList) & { __isUnion?: true }
+export type BlockDocument = (Authors | AuthorsItem | Blog | Meta | Newsletter | Posts | PostsItem | authorsItem_AsList | postsItem_AsList) & { __isUnion?: true }
 
 export interface BlockDocumentSys {
     apiNamePath: Scalars['String']
@@ -233,7 +239,6 @@ export interface Blog {
     _title: Scalars['String']
     authors: Authors
     morePosts: Scalars['String']
-    newsletter: Newsletter
     posts: Posts
     __typename: 'Blog'
 }
@@ -271,6 +276,21 @@ export type MediaBlock = (BlockAudio | BlockFile | BlockImage | BlockVideo) & { 
 
 export type MediaBlockUnion = (BlockAudio | BlockFile | BlockImage | BlockVideo) & { __isUnion?: true }
 
+export interface Meta {
+    _analyticsKey: Scalars['String']
+    _dashboardUrl: Scalars['String']
+    _id: Scalars['String']
+    _idPath: Scalars['String']
+    _slug: Scalars['String']
+    _slugPath: Scalars['String']
+    _sys: BlockDocumentSys
+    _title: Scalars['String']
+    description: (Scalars['String'] | null)
+    ogImage: BlockOgImage
+    title: (Scalars['String'] | null)
+    __typename: 'Meta'
+}
+
 export interface Mutation {
     /**
      * Returns a signed url and an upload url so that you can upload files into your repository.
@@ -305,11 +325,16 @@ export interface Mutation {
 }
 
 export interface Newsletter {
-    /** The `adminKey` gives clients the ability to query, delete and update this block's data. **It's not meant to be exposed to the public.** */
-    adminKey: Scalars['bshb_event__530312905']
-    /** The `ingestKey` gives clients the ability to send new events to this block. Generally, it's safe to expose it to the public. */
-    ingestKey: Scalars['bshb_event__530312905']
-    schema: Scalars['BSHBEventSchema']
+    _analyticsKey: Scalars['String']
+    _dashboardUrl: Scalars['String']
+    _id: Scalars['String']
+    _idPath: Scalars['String']
+    _slug: Scalars['String']
+    _slugPath: Scalars['String']
+    _sys: BlockDocumentSys
+    _title: Scalars['String']
+    sendNewPost: SendNewPost
+    subscribers: Subscribers
     __typename: 'Newsletter'
 }
 
@@ -359,6 +384,8 @@ export interface Query {
     _structure: Scalars['JSON']
     _sys: RepoSys
     blog: Blog
+    meta: Meta
+    newsletter: Newsletter
     __typename: 'Query'
 }
 
@@ -374,6 +401,21 @@ export interface RepoSys {
 }
 
 export type RichTextJson = (BaseRichTextJson | BodyRichText) & { __isUnion?: true }
+
+export interface SendNewPost {
+    /** The `webhookSecret` is used to verify the authenticity of the webhook request, and also to type the payload. */
+    webhookSecret: Scalars['bshb_workflow_218139063']
+    __typename: 'SendNewPost'
+}
+
+export interface Subscribers {
+    /** The `adminKey` gives clients the ability to query, delete and update this block's data. **It's not meant to be exposed to the public.** */
+    adminKey: Scalars['bshb_event__530312905']
+    /** The `ingestKey` gives clients the ability to send new events to this block. Generally, it's safe to expose it to the public. */
+    ingestKey: Scalars['bshb_event__530312905']
+    schema: Scalars['BSHBEventSchema']
+    __typename: 'Subscribers'
+}
 
 export interface TransactionStatus {
     /** Duration in milliseconds. */
@@ -556,6 +598,8 @@ export interface BlockDocumentGenqlSelection{
     on_Authors?: AuthorsGenqlSelection
     on_AuthorsItem?: AuthorsItemGenqlSelection
     on_Blog?: BlogGenqlSelection
+    on_Meta?: MetaGenqlSelection
+    on_Newsletter?: NewsletterGenqlSelection
     on_Posts?: PostsGenqlSelection
     on_PostsItem?: PostsItemGenqlSelection
     on_authorsItem_AsList?: authorsItem_AsListGenqlSelection
@@ -709,7 +753,6 @@ export interface BlogGenqlSelection{
     /** Skip the first n items. */
     skip?: (Scalars['Int'] | null)} })
     morePosts?: boolean | number
-    newsletter?: NewsletterGenqlSelection
     posts?: (PostsGenqlSelection & { __args?: {
     /** Filter by a field. */
     filter?: (PostsItemFilterInput | null), 
@@ -783,6 +826,27 @@ export interface MediaBlockUnionGenqlSelection{
     __typename?: boolean | number
 }
 
+export interface MetaGenqlSelection{
+    _analyticsKey?: { __args: {
+    /**
+     * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
+     * 
+     * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
+     */
+    scope?: (AnalyticsKeyScope | null)} } | boolean | number
+    _dashboardUrl?: boolean | number
+    _id?: boolean | number
+    _idPath?: boolean | number
+    _slug?: boolean | number
+    _slugPath?: boolean | number
+    _sys?: BlockDocumentSysGenqlSelection
+    _title?: boolean | number
+    description?: boolean | number
+    ogImage?: BlockOgImageGenqlSelection
+    title?: boolean | number
+    __typename?: boolean | number
+}
+
 export interface MutationGenqlSelection{
     /**
      * Returns a signed url and an upload url so that you can upload files into your repository.
@@ -837,11 +901,22 @@ export interface MutationGenqlSelection{
 }
 
 export interface NewsletterGenqlSelection{
-    /** The `adminKey` gives clients the ability to query, delete and update this block's data. **It's not meant to be exposed to the public.** */
-    adminKey?: boolean | number
-    /** The `ingestKey` gives clients the ability to send new events to this block. Generally, it's safe to expose it to the public. */
-    ingestKey?: boolean | number
-    schema?: boolean | number
+    _analyticsKey?: { __args: {
+    /**
+     * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
+     * 
+     * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
+     */
+    scope?: (AnalyticsKeyScope | null)} } | boolean | number
+    _dashboardUrl?: boolean | number
+    _id?: boolean | number
+    _idPath?: boolean | number
+    _slug?: boolean | number
+    _slugPath?: boolean | number
+    _sys?: BlockDocumentSysGenqlSelection
+    _title?: boolean | number
+    sendNewPost?: SendNewPostGenqlSelection
+    subscribers?: SubscribersGenqlSelection
     __typename?: boolean | number
 }
 
@@ -919,6 +994,8 @@ export interface QueryGenqlSelection{
     withTypeOptions?: (Scalars['Boolean'] | null)} } | boolean | number
     _sys?: RepoSysGenqlSelection
     blog?: BlogGenqlSelection
+    meta?: MetaGenqlSelection
+    newsletter?: NewsletterGenqlSelection
     __typename?: boolean | number
 }
 
@@ -943,9 +1020,24 @@ export interface RichTextJsonGenqlSelection{
 
 export interface SelectFilter {excludes?: (Scalars['String'] | null),excludesAll?: (Scalars['String'][] | null),includes?: (Scalars['String'] | null),includesAll?: (Scalars['String'][] | null),includesAny?: (Scalars['String'][] | null),isEmpty?: (Scalars['Boolean'] | null)}
 
+export interface SendNewPostGenqlSelection{
+    /** The `webhookSecret` is used to verify the authenticity of the webhook request, and also to type the payload. */
+    webhookSecret?: boolean | number
+    __typename?: boolean | number
+}
+
 export interface StringFilter {contains?: (Scalars['String'] | null),endsWith?: (Scalars['String'] | null),eq?: (Scalars['String'] | null),isNull?: (Scalars['Boolean'] | null),matches?: (StringMatchesFilter | null),notEq?: (Scalars['String'] | null),startsWith?: (Scalars['String'] | null)}
 
 export interface StringMatchesFilter {caseSensitive?: (Scalars['Boolean'] | null),pattern: Scalars['String']}
+
+export interface SubscribersGenqlSelection{
+    /** The `adminKey` gives clients the ability to query, delete and update this block's data. **It's not meant to be exposed to the public.** */
+    adminKey?: boolean | number
+    /** The `ingestKey` gives clients the ability to send new events to this block. Generally, it's safe to expose it to the public. */
+    ingestKey?: boolean | number
+    schema?: boolean | number
+    __typename?: boolean | number
+}
 
 export interface TargetBlock {focus?: (Scalars['Boolean'] | null),id: Scalars['String'],label: Scalars['String']}
 
@@ -1130,6 +1222,10 @@ export interface FragmentsMap {
     root: MediaBlock,
     selection: MediaBlockGenqlSelection,
 }
+  Meta: {
+    root: Meta,
+    selection: MetaGenqlSelection,
+}
   Mutation: {
     root: Mutation,
     selection: MutationGenqlSelection,
@@ -1157,6 +1253,14 @@ export interface FragmentsMap {
   RichTextJson: {
     root: RichTextJson,
     selection: RichTextJsonGenqlSelection,
+}
+  SendNewPost: {
+    root: SendNewPost,
+    selection: SendNewPostGenqlSelection,
+}
+  Subscribers: {
+    root: Subscribers,
+    selection: SubscribersGenqlSelection,
 }
   TransactionStatus: {
     root: TransactionStatus,

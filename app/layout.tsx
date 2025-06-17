@@ -23,11 +23,13 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: data.meta?.title || `BaseHub x v0 Example`,
-    description: data.meta?.description || `This is a blog built with BaseHub and v0.`,
+    description:
+      data.meta?.description || `This is a blog built with BaseHub and v0.`,
     generator: "v0.dev",
     openGraph: {
       title: data.meta?.title || `BaseHub x v0 Example`,
-      description: data.meta?.description || `This is a blog built with BaseHub and v0.`,
+      description:
+        data.meta?.description || `This is a blog built with BaseHub and v0.`,
       images: data.meta?.ogImage?.url
         ? [
             {
@@ -42,17 +44,25 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title: data.meta?.title || `BaseHub x v0 Example`,
-      description: data.meta?.description || `This is a blog built with BaseHub and v0.`,
+      description:
+        data.meta?.description || `This is a blog built with BaseHub and v0.`,
       images: data.meta?.ogImage?.url ? [data.meta.ogImage.url] : [],
     },
   }
 }
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <Toolbar />
           <Pump
             queries={[
@@ -71,7 +81,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               "use server"
 
               if (!_sys.playgroundInfo) return null
-              return <PlaygroundNotification playgroundInfo={_sys.playgroundInfo} />
+              return (
+                <PlaygroundNotification playgroundInfo={_sys.playgroundInfo} />
+              )
             }}
           </Pump>
           <Header />
