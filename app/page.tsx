@@ -15,20 +15,21 @@ export default async function Page() {
               __args: { orderBy: "date__DESC" },
               items: PostMetaFragment,
             },
-            newsletter: {
-              ingestKey: true,
-              schema: true,
-            },
           },
+            newsletter: {
+              subscribers: {
+                ingestKey: true,
+                schema: true,
+              },
+            },
         },
       ]}
     >
-      {async ([{ blog }]) => {
+      {async ([{ blog, newsletter }]) => {
         "use server"
 
         const heroPost = blog.posts.items[0]
         const morePosts = blog.posts.items.slice(1)
-        const newsletter = blog.newsletter
 
         return (
           <main>
@@ -37,7 +38,7 @@ export default async function Page() {
               {heroPost && <HeroPost {...heroPost} />}
               <MoreStories morePosts={morePosts} title={blog.morePosts} />
             </section>
-            <Newsletter newsletter={newsletter} />
+            <Newsletter newsletter={newsletter.subscribers} />
           </main>
         )
       }}
