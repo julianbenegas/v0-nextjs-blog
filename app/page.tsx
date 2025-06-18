@@ -3,8 +3,50 @@ import { Intro } from "./components/intro"
 import { HeroPost, PostMetaFragment } from "./components/hero-post"
 import { MoreStories } from "./components/more-stories"
 import { Newsletter } from "./components/newsletter"
+import { Metadata } from "next"
 
 export const dynamic = "force-static"
+
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await basehub().query({
+    meta: {
+      title: true,
+      description: true,
+      ogImage: {
+        url: true,
+      },
+    },
+  })
+
+  return {
+    title: data.meta?.title || `BaseHub x v0 Example`,
+    description:
+      data.meta?.description || `This is a blog built with BaseHub and v0.`,
+    generator: "v0.dev",
+    openGraph: {
+      title: data.meta?.title || `BaseHub x v0 Example`,
+      description:
+        data.meta?.description || `This is a blog built with BaseHub and v0.`,
+      images: data.meta?.ogImage?.url
+        ? [
+            {
+              url: data.meta.ogImage.url,
+              width: 1200,
+              height: 630,
+              alt: data.meta?.title || `BaseHub x v0 Example`,
+            },
+          ]
+        : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: data.meta?.title || `BaseHub x v0 Example`,
+      description:
+        data.meta?.description || `This is a blog built with BaseHub and v0.`,
+      images: data.meta?.ogImage?.url ? [data.meta.ogImage.url] : [],
+    },
+  }
+}
 
 export default async function Page() {
   const data = await basehub().query({
