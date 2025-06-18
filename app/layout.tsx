@@ -8,6 +8,7 @@ import { PlaygroundNotification } from "./components/playground-notification"
 import "./globals.css"
 import "../basehub.config"
 import { ThemeProvider } from "@/components/theme-provider"
+import { isMainV0 } from "../basehub.config"
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await basehub().query({
@@ -63,28 +64,32 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Toolbar />
-          <Pump
-            queries={[
-              {
-                _sys: {
-                  playgroundInfo: {
-                    expiresAt: true,
-                    editUrl: true,
-                    claimUrl: true,
+          {!isMainV0 && (
+            <Pump
+              queries={[
+                {
+                  _sys: {
+                    playgroundInfo: {
+                      expiresAt: true,
+                      editUrl: true,
+                      claimUrl: true,
+                    },
                   },
                 },
-              },
-            ]}
-          >
-            {async ([{ _sys }]) => {
-              "use server"
+              ]}
+            >
+              {async ([{ _sys }]) => {
+                "use server"
 
-              if (!_sys.playgroundInfo) return null
-              return (
-                <PlaygroundNotification playgroundInfo={_sys.playgroundInfo} />
-              )
-            }}
-          </Pump>
+                if (!_sys.playgroundInfo) return null
+                return (
+                  <PlaygroundNotification
+                    playgroundInfo={_sys.playgroundInfo}
+                  />
+                )
+              }}
+            </Pump>
+          )}
           <main className="min-h-screen">
             {children}
             <Footer />
