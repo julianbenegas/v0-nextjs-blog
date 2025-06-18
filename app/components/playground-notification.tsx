@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { AlertTriangle, Check, Clock } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { isMainV0 } from "@/basehub.config"
 
 interface PlaygroundSetupModalProps {
   playgroundInfo: {
@@ -84,7 +85,7 @@ export function PlaygroundSetupModal({
   if (isDismissed) return null
 
   // Show if playground has expiry OR environment variables are missing
-  const shouldShow = !allValid
+  const shouldShow = !allValid && !isMainV0
 
   if (!shouldShow) return null
 
@@ -126,7 +127,7 @@ export function PlaygroundSetupModal({
       >
         <div className="flex items-center justify-between flex-shrink-0 px-4 py-3 border-b border-dashed bg-neutral-50 border-neutral-200 rounded-t-xl">
           <div className="flex items-center gap-2">
-            <span className={cn("text-base font-semibold")}>Blog Setup</span>
+            <span className={cn("text-base font-semibold text-white")}>Blog Setup</span>
           </div>
           <a
             href={playgroundInfo.editUrl}
