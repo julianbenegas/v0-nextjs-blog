@@ -1,16 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import {
-  AlertTriangle,
-  Check,
-  Clock,
-  EditIcon,
-  ExternalLink,
-  PencilIcon,
-} from "lucide-react"
+import { AlertTriangle, Check, Clock, ExternalLink } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { isMainV0 } from "@/basehub.config"
 
 interface PlaygroundSetupModalProps {
   playgroundInfo: {
@@ -92,7 +84,7 @@ export function PlaygroundSetupModal({
   if (isDismissed) return null
 
   // Show if playground has expiry OR environment variables are missing
-  const shouldShow = !allValid && !isMainV0
+  const shouldShow = !allValid
 
   if (!shouldShow) return null
 
