@@ -8,7 +8,6 @@ import { PlaygroundNotification } from "./components/playground-notification"
 import "./globals.css"
 import "../basehub.config"
 import { ThemeProvider } from "@/components/theme-provider"
-import { Header } from "./components/header"
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await basehub().query({
@@ -86,7 +85,6 @@ export default function RootLayout({
               )
             }}
           </Pump>
-          <Header />
           <main className="min-h-screen">
             {children}
             <Footer />
