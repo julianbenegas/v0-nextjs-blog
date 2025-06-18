@@ -7,6 +7,8 @@ import { Post, PostFragment } from "@/app/components/post"
 import { MoreStories } from "@/app/components/more-stories"
 import { PostMetaFragment } from "@/app/components/hero-post"
 
+export const dynamic = "force-static"
+
 export async function generateStaticParams() {
   const data = await basehub().query({
     blog: { posts: { items: { _slug: true } } },
@@ -17,7 +19,9 @@ export async function generateStaticParams() {
 
 type PageProps = { params: Promise<{ slug: string }> }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params
   const postData = await basehub().query({
     meta: {
@@ -108,7 +112,10 @@ export default async function PostPage({ params }: PageProps) {
               </h2>
               <Post {...post} />
               <hr className="mt-28 mb-24" />
-              <MoreStories morePosts={morePostsData.blog.posts.items} title={postData.blog.morePosts} />
+              <MoreStories
+                morePosts={morePostsData.blog.posts.items}
+                title={postData.blog.morePosts}
+              />
             </section>
           </main>
         )
