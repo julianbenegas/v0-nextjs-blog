@@ -29,7 +29,13 @@ export function Post({ _title, author, date, coverImage, body }: PostFragment) {
       </div>
 
       <div className="mb-8 sm:mx-0 md:mb-16">
-        <CoverImage title={_title} url={coverImage.url} width={1500} priority />
+        <CoverImage
+          title={_title}
+          url={coverImage.url}
+          width={1500}
+          height={1000}
+          priority
+        />
       </div>
 
       <div className="mx-auto max-w-2xl">

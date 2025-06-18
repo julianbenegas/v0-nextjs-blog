@@ -18,6 +18,7 @@ export const PostMetaFragment = fragmentOn("PostsItem", {
   coverImage: {
     url: true,
     alt: true,
+    aspectRatio: true,
   },
   date: true,
   excerpt: true,
@@ -41,6 +42,7 @@ export function HeroPost({
           slug={_slug}
           url={coverImage.url}
           width={1500}
+          height={1000}
           priority
         />
       </div>

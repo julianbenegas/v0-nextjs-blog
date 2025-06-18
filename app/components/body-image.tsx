@@ -16,6 +16,7 @@ export function BodyImage({
         alt={props.caption ?? "Image"}
         className="rounded-lg"
         width={700}
+        height={700}
       />
       {props.caption && (
         <figcaption className="text-center">{props.caption}</figcaption>
