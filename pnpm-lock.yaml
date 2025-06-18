@@ -11,9 +11,6 @@ importers:
       '@radix-ui/react-slot':
         specifier: latest
         version: 1.2.3(@types/react@19.0.0)(react@19.0.0)
-      '@tailwindcss/typography':
-        specifier: ^0.5.16
-        version: 0.5.16(tailwindcss@3.4.17)
       basehub:
         specifier: latest
         version: 9.0.1(@babel/runtime@7.27.6)(@types/react@19.0.0)(react@19.0.0)(typescript@5.0.2)
@@ -48,6 +45,9 @@ importers:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.17)
     devDependencies:
+      '@tailwindcss/typography':
+        specifier: ^0.5.16
+        version: 0.5.16(tailwindcss@3.4.17)
       '@types/node':
         specifier: ^22
         version: 22.0.0
