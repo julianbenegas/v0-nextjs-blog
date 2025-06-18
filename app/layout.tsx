@@ -1,6 +1,5 @@
 import type React from "react"
 import { Toolbar } from "basehub/next-toolbar"
-import { Pump } from "basehub/react-pump"
 import type { Metadata } from "next"
 import { basehub } from "basehub"
 import Footer from "./components/footer"
@@ -9,6 +8,8 @@ import "./globals.css"
 import "../basehub.config"
 import { ThemeProvider } from "@/components/theme-provider"
 import { isMainV0 } from "../basehub.config"
+
+export const dynamic = "force-static"
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await basehub().query({
@@ -51,9 +52,31 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  let playgroundNotification = null
+
+  if (!isMainV0) {
+    const playgroundData = await basehub().query({
+      _sys: {
+        playgroundInfo: {
+          expiresAt: true,
+          editUrl: true,
+          claimUrl: true,
+        },
+      },
+    })
+
+    if (playgroundData._sys.playgroundInfo) {
+      playgroundNotification = (
+        <PlaygroundNotification
+          playgroundInfo={playgroundData._sys.playgroundInfo}
+        />
+      )
+    }
+  }
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
@@ -64,32 +87,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Toolbar />
-          {!isMainV0 && (
-            <Pump
-              queries={[
-                {
-                  _sys: {
-                    playgroundInfo: {
-                      expiresAt: true,
-                      editUrl: true,
-                      claimUrl: true,
-                    },
-                  },
-                },
-              ]}
-            >
-              {async ([{ _sys }]) => {
-                "use server"
-
-                if (!_sys.playgroundInfo) return null
-                return (
-                  <PlaygroundNotification
-                    playgroundInfo={_sys.playgroundInfo}
-                  />
-                )
-              }}
-            </Pump>
-          )}
+          {playgroundNotification}
           <main className="min-h-screen">
             {children}
             <Footer />
