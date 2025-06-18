@@ -4,31 +4,29 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { parseFormData, sendEvent } from "basehub/events"
+import { Subscribers } from "@/basehub"
 
 interface NewsletterProps {
-  newsletter: {
-    ingestKey: string
-    schema: Array<{
-      id: string
-      label: string
-      type: string
-      name: string
-      required?: boolean
-      placeholder?: string
-    }>
-  }
+  newsletter: Pick<Subscribers, "ingestKey" | "schema">
 }
 
 export function Newsletter({ newsletter }: NewsletterProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
+  const [message, setMessage] = useState<{
+    type: "success" | "error"
+    text: string
+  } | null>(null)
 
   const handleSubmit = async (formData: FormData) => {
     setIsSubmitting(true)
     setMessage(null)
 
     try {
-      const parsedSubmission = parseFormData(newsletter.ingestKey, newsletter.schema, formData)
+      const parsedSubmission = parseFormData(
+        newsletter.ingestKey,
+        newsletter.schema,
+        formData,
+      )
 
       if (!parsedSubmission.success) {
         throw new Error(JSON.stringify(parsedSubmission.errors))
@@ -56,12 +54,15 @@ export function Newsletter({ newsletter }: NewsletterProps) {
   }
 
   return (
-    <section className="border-t bg-gray-50 dark:bg-gray-900">
+    <section className="border-t bg-neutral-50 dark:bg-neutral-900">
       <div className="container mx-auto px-5">
         <div className="py-16 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold tracking-tighter leading-tight mb-4">Stay Updated</h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-            Subscribe to our newsletter to get the latest posts delivered straight to your inbox.
+          <h2 className="text-3xl lg:text-4xl font-bold tracking-tighter leading-tight mb-4">
+            Stay Updated
+          </h2>
+          <p className="text-lg text-neutral-600 dark:text-neutral-300 mb-8 max-w-2xl mx-auto">
+            Subscribe to our newsletter to get the latest posts delivered
+            straight to your inbox.
           </p>
 
           <form action={handleSubmit} className="max-w-md mx-auto space-y-4">
@@ -75,14 +76,24 @@ export function Newsletter({ newsletter }: NewsletterProps) {
                       disabled={isSubmitting}
                       placeholder={field.placeholder || "Enter your email"}
                     />
-                    <Button type="submit" disabled={isSubmitting} className="px-6">
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="px-6"
+                    >
                       {isSubmitting ? "Subscribing..." : "Subscribe"}
                     </Button>
                   </div>
                 ) : (
                   <div>
-                    <label className="block text-sm font-medium mb-1">{field.label}</label>
-                    <Input {...field} disabled={isSubmitting} placeholder={field.placeholder} />
+                    <label className="block text-sm font-medium mb-1">
+                      {field.label}
+                    </label>
+                    <Input
+                      {...field}
+                      disabled={isSubmitting}
+                      placeholder={field.placeholder}
+                    />
                   </div>
                 )}
               </div>
@@ -107,7 +118,9 @@ export function Newsletter({ newsletter }: NewsletterProps) {
             {message && (
               <p
                 className={`text-sm ${
-                  message.type === "success" ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"
+                  message.type === "success"
+                    ? "text-green-600 dark:text-green-400"
+                    : "text-red-600 dark:text-red-400"
                 }`}
               >
                 {message.text}

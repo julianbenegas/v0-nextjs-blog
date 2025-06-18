@@ -1,7 +1,14 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { AlertTriangle, Check, Clock } from "lucide-react"
+import {
+  AlertTriangle,
+  Check,
+  Clock,
+  EditIcon,
+  ExternalLink,
+  PencilIcon,
+} from "lucide-react"
 import { cn } from "@/lib/utils"
 import { isMainV0 } from "@/basehub.config"
 
@@ -105,7 +112,7 @@ export function PlaygroundSetupModal({
         onClick={() => setOpen(true)}
         className={cn(
           "inline-flex absolute top-4 right-4 items-center justify-center text-center gap-2 px-4 h-9 font-medium transition-all duration-200 rounded-lg outline-none pointer-events-auto bg-orange-600 hover:bg-orange-700 text-sm text-white shadow-sm",
-          open && "opacity-30 scale-95 pointer-events-none",
+          open && "opacity-20 scale-95 pointer-events-none",
         )}
       >
         {hasPlaygroundExpiry ? (
@@ -127,15 +134,17 @@ export function PlaygroundSetupModal({
       >
         <div className="flex items-center justify-between flex-shrink-0 px-4 py-3 border-b border-dashed bg-neutral-50 border-neutral-200 rounded-t-xl">
           <div className="flex items-center gap-2">
-            <span className={cn("text-base font-semibold text-white")}>Blog Setup</span>
+            <span className={cn("text-base font-semibold text-black")}>
+              Blog Setup
+            </span>
           </div>
           <a
             href={playgroundInfo.editUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-3 h-7 font-medium transition-all duration-200 rounded-lg outline-none pointer-events-auto bg-orange-600 hover:bg-orange-700 text-sm text-white shadow-sm border border-orange-200 focus:ring-2 focus:ring-orange-500 focus:ring-offset-1"
+            className="inline-flex items-center gap-2 px-3 h-7 font-medium transition-all duration-200 rounded-lg outline-none bg-orange-600 hover:bg-orange-700 text-sm text-white shadow-sm border border-orange-200 focus:ring-2 focus:ring-orange-500 focus:ring-offset-1"
           >
-            Edit playground
+            <ExternalLink className="w-4 h-4" /> Open Playground
           </a>
         </div>
 
