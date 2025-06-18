@@ -1,8 +1,8 @@
-import Link from "next/link";
-import Date from "./date";
-import CoverImage from "./cover-image";
-import Avatar from "./avatar";
-import { fragmentOn } from "basehub";
+import Link from "next/link"
+import Date from "./date"
+import CoverImage from "./cover-image"
+import Avatar from "./avatar"
+import { fragmentOn } from "basehub"
 
 export const PostMetaFragment = fragmentOn("PostsItem", {
   _id: true,
@@ -21,9 +21,9 @@ export const PostMetaFragment = fragmentOn("PostsItem", {
   },
   date: true,
   excerpt: true,
-});
+})
 
-export type PostMetaFragment = fragmentOn.infer<typeof PostMetaFragment>;
+export type PostMetaFragment = fragmentOn.infer<typeof PostMetaFragment>
 
 export function HeroPost({
   _title,
@@ -36,7 +36,13 @@ export function HeroPost({
   return (
     <section>
       <div className="mb-8 md:mb-16">
-        <CoverImage title={_title} slug={_slug} url={coverImage.url} />
+        <CoverImage
+          title={_title}
+          slug={_slug}
+          url={coverImage.url}
+          width={1500}
+          priority
+        />
       </div>
       <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
         <div>
@@ -55,5 +61,5 @@ export function HeroPost({
         </div>
       </div>
     </section>
-  );
+  )
 }

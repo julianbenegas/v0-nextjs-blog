@@ -1,18 +1,18 @@
-import { RichText } from "basehub/react-rich-text";
-import { CodeBlock } from "basehub/react-code-block";
-import CoverImage from "@/app/components/cover-image";
-import Avatar from "@/app/components/avatar";
-import Date from "@/app/components/date";
-import { BodyImage } from "./body-image";
-import { fragmentOn } from "basehub";
-import { PostMetaFragment } from "./hero-post";
+import { RichText } from "basehub/react-rich-text"
+import { CodeBlock } from "basehub/react-code-block"
+import CoverImage from "@/app/components/cover-image"
+import Avatar from "@/app/components/avatar"
+import Date from "@/app/components/date"
+import { BodyImage } from "./body-image"
+import { fragmentOn } from "basehub"
+import { PostMetaFragment } from "./hero-post"
 
 export const PostFragment = fragmentOn("PostsItem", {
   ...PostMetaFragment,
   body: { json: { content: true } },
-});
+})
 
-export type PostFragment = fragmentOn.infer<typeof PostFragment>;
+export type PostFragment = fragmentOn.infer<typeof PostFragment>
 
 export function Post({ _title, author, date, coverImage, body }: PostFragment) {
   return (
@@ -29,7 +29,7 @@ export function Post({ _title, author, date, coverImage, body }: PostFragment) {
       </div>
 
       <div className="mb-8 sm:mx-0 md:mb-16">
-        <CoverImage title={_title} url={coverImage.url} />
+        <CoverImage title={_title} url={coverImage.url} width={1500} priority />
       </div>
 
       <div className="mx-auto max-w-2xl">
@@ -56,5 +56,5 @@ export function Post({ _title, author, date, coverImage, body }: PostFragment) {
         </div>
       </div>
     </article>
-  );
+  )
 }

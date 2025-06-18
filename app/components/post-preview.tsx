@@ -1,8 +1,8 @@
-import Link from "next/link";
-import Avatar from "./avatar";
-import Date from "./date";
-import CoverImage from "./cover-image";
-import { PostMetaFragment } from "./hero-post";
+import Link from "next/link"
+import Avatar from "./avatar"
+import Date from "./date"
+import CoverImage from "./cover-image"
+import { PostMetaFragment } from "./hero-post"
 
 export function PostPreview({
   _title,
@@ -15,7 +15,12 @@ export function PostPreview({
   return (
     <div>
       <div className="mb-5">
-        <CoverImage title={_title} slug={_slug} url={coverImage.url} />
+        <CoverImage
+          title={_title}
+          slug={_slug}
+          url={coverImage.url}
+          width={700}
+        />
       </div>
       <h3 className="text-3xl mb-3 leading-snug">
         <Link href={`/posts/${_slug}`} className="hover:underline">
@@ -28,5 +33,5 @@ export function PostPreview({
       <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
       {author && <Avatar title={author._title} url={author.avatar.url} />}
     </div>
-  );
+  )
 }

@@ -1,28 +1,31 @@
-import Link from "next/link";
-import { clsx } from "clsx";
-import { BaseHubImage } from "basehub/next-image";
+import Link from "next/link"
+import { clsx } from "clsx"
+import { BaseHubImage } from "basehub/next-image"
 
 export default function CoverImage({
   title,
   url,
   slug,
+  width,
+  priority,
 }: {
-  title: string;
-  url: string;
-  slug?: string;
+  title: string
+  url: string
+  slug?: string
+  width: number
+  priority?: boolean
 }) {
   const image = (
     <BaseHubImage
       alt={`Cover Image for ${title}`}
-      priority
-      width={2000}
-      height={1000}
+      width={width}
+      priority={priority}
       className={clsx("shadow-sm rounded-lg", {
         "hover:shadow-md transition-shadow duration-200": slug,
       })}
       src={url}
     />
-  );
+  )
 
   return (
     <div className="sm:mx-0">
@@ -34,5 +37,5 @@ export default function CoverImage({
         image
       )}
     </div>
-  );
+  )
 }
