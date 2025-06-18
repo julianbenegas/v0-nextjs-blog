@@ -6,6 +6,7 @@ import { Newsletter } from "./components/newsletter"
 import { Metadata } from "next"
 
 export const dynamic = "force-static"
+export const revalidate = 30
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await basehub().query({

@@ -7,6 +7,7 @@ import { MoreStories } from "@/app/components/more-stories"
 import { PostMetaFragment } from "@/app/components/hero-post"
 
 export const dynamic = "force-static"
+export const revalidate = 30
 
 export async function generateStaticParams() {
   const data = await basehub().query({
