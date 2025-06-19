@@ -6,7 +6,7 @@ import { PlaygroundSetupModal } from "./components/playground-notification"
 import "./globals.css"
 import "../basehub.config"
 import { ThemeProvider } from "@/components/theme-provider"
-import { isMainV0 } from "../basehub.config"
+import "../basehub.config"
 
 export const dynamic = "force-static"
 export const revalidate = 30
@@ -49,7 +49,7 @@ export default async function RootLayout({
     value: process.env.BASEHUB_TOKEN,
   })
 
-  if (!isMainV0 && !allValid && process.env.NODE_ENV !== "production") {
+  if (!allValid && process.env.NODE_ENV !== "production") {
     const playgroundData = await basehub().query({
       _sys: {
         playgroundInfo: {
