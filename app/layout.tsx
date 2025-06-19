@@ -46,12 +46,13 @@ export default async function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   let playgroundNotification = null
 
+  subscribeEnv({
+    name: "BASEHUB_TOKEN",
+    label: "BaseHub Read Token",
+    value: process.env.BASEHUB_TOKEN,
+  })
+
   if (!isMainV0 && !allValid && process.env.NODE_ENV !== "production") {
-    subscribeEnv({
-      name: "BASEHUB_TOKEN",
-      label: "BaseHub Read Token",
-      value: process.env.BASEHUB_TOKEN,
-    })
 
     const playgroundData = await basehub().query({
       _sys: {
