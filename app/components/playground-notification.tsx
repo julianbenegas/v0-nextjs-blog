@@ -10,20 +10,7 @@ interface PlaygroundSetupModalProps {
     editUrl: string
     claimUrl: string | null
   }
-  envs: {
-    [key: string]: boolean
-  }
-}
-
-interface EnvCheckResult {
-  name: string
-  isValid: boolean
-  label: string
-}
-
-// Environment variable labels mapping
-const ENV_LABELS: { [key: string]: string } = {
-  BASEHUB_TOKEN: "BaseHub Read Token",
+  envs: Record<string, { isValid: boolean; name: string; label: string }>
 }
 
 export function PlaygroundSetupModal({
@@ -34,18 +21,7 @@ export function PlaygroundSetupModal({
   const [open, setOpen] = useState(false)
 
   // Convert envs object to EnvCheckResult array
-  const envResults: EnvCheckResult[] = Object.entries(envs).map(
-    ([name, isValid]) => ({
-      name,
-      isValid,
-      label:
-        ENV_LABELS[name] ||
-        name
-          .replace(/_/g, " ")
-          .toLowerCase()
-          .replace(/\b\w/g, (l) => l.toUpperCase()),
-    }),
-  )
+  const envResults = Object.values(envs)
 
   const validCount = envResults.filter((env) => env.isValid).length
   const allValid = validCount === envResults.length

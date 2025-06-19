@@ -9,13 +9,33 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { isMainV0 } from "../basehub.config"
 
 export const dynamic = "force-static"
+export const revalidate = 30
 
 export const metadata = {
   generator: "v0.dev",
 }
 
-const envs = {
-  BASEHUB_TOKEN: false,
+const envs: Record<string, { isValid: boolean; name: string; label: string }> =
+  {}
+let allValid = true
+const subscribeEnv = ({
+  name,
+  label,
+  value,
+}: {
+  name: string
+  label: string
+  value: string | undefined
+}) => {
+  const isValid = !!value
+  if (!isValid) {
+    allValid = false
+  }
+  envs[name] = {
+    isValid,
+    name,
+    label,
+  }
 }
 
 export default async function RootLayout({
@@ -23,14 +43,10 @@ export default async function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   let playgroundNotification = null
 
-  // check if all envs are valid
-  let allValid = true
-  Object.entries(envs).forEach(([key, value]) => {
-    if (!process.env[key]) {
-      allValid = false
-      return
-    }
-    envs[key as keyof typeof envs] = true
+  subscribeEnv({
+    name: "BASEHUB_TOKEN",
+    label: "BaseHub Read Token",
+    value: process.env.BASEHUB_TOKEN,
   })
 
   if (!isMainV0 && !allValid && process.env.NODE_ENV !== "production") {
