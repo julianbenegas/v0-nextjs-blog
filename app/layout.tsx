@@ -17,9 +17,8 @@ export const metadata = {
 
 const envs: Record<string, { isValid: boolean; name: string; label: string }> =
   {}
-const _vercel_url_env_name = 'VERCEL_URL'
-
-const isMainV0 = process.env[_vercel_url_env_name] = 'kzmoq0lqn6w3dtvnp1yp.lite.vusercontent.ne'
+const _vercel_url_env_name = 'VERCEL_BRANCH_URL'
+const isMainV0 = process.env[_vercel_url_env_name]?.startsWith('kzmoq0lqn6w3dtvnp1yp')
 
 let allValid = true
 const subscribeEnv = ({
