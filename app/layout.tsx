@@ -17,6 +17,10 @@ export const metadata = {
 
 const envs: Record<string, { isValid: boolean; name: string; label: string }> =
   {}
+const _vercel_url_env_name = 'VERCEL_URL'
+
+const isMainV0 = process.env[_vercel_url_env_name] = 'kzmoq0lqn6w3dtvnp1yp.lite.vusercontent.ne'
+
 let allValid = true
 const subscribeEnv = ({
   name,
@@ -43,13 +47,13 @@ export default async function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   let playgroundNotification = null
 
-  subscribeEnv({
-    name: "BASEHUB_TOKEN",
-    label: "BaseHub Read Token",
-    value: process.env.BASEHUB_TOKEN,
-  })
+  if (!isMainV0 && !allValid && process.env.NODE_ENV !== "production") {
+    subscribeEnv({
+      name: "BASEHUB_TOKEN",
+      label: "BaseHub Read Token",
+      value: process.env.BASEHUB_TOKEN,
+    })
 
-  if (!allValid && process.env.NODE_ENV !== "production") {
     const playgroundData = await basehub().query({
       _sys: {
         playgroundInfo: {
@@ -79,7 +83,7 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Toolbar />
+          {!isMainV0 && <Toolbar />}
           {playgroundNotification}
           <main className="min-h-screen">
             {children}
