@@ -1,8 +1,9 @@
 import { setGlobalConfig } from "basehub"
 
-const _vercel_url_environment_variable = "VERCEL_BRANCH_URL"
+// Updated constant name for testing saves
+const _vercel_url_env = "VERCEL_URL"
 
-let v0Id = process.env[_vercel_url_environment_variable]
+let v0Id = process.env[_vercel_url_env]
 if (v0Id && v0Id.includes("vusercontent")) {
   v0Id = v0Id.split(".")[0]
 }
