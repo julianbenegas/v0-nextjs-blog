@@ -9,6 +9,7 @@ export default function CoverImage({
   width,
   height,
   priority,
+  className,
 }: {
   title: string
   url: string
@@ -16,6 +17,7 @@ export default function CoverImage({
   width: number
   height: number
   priority?: boolean
+  className?: string
 }) {
   const image = (
     <BaseHubImage
@@ -23,7 +25,7 @@ export default function CoverImage({
       width={width}
       height={height}
       priority={priority}
-      className={clsx("shadow-sm rounded-lg", {
+      className={clsx("shadow-sm rounded-lg object-cover", className, {
         "hover:shadow-md transition-shadow duration-200": slug,
       })}
       src={url}

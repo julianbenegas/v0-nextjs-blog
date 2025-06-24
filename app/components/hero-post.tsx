@@ -43,6 +43,7 @@ export function HeroPost({
           url={coverImage.url}
           width={1500}
           height={1000}
+          className="max-h-[50vh] min-h-[300px]"
           priority
         />
       </div>

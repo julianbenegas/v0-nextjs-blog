@@ -21,6 +21,7 @@ export function PostPreview({
           url={coverImage.url}
           width={700}
           height={700}
+          className="aspect-video"
         />
       </div>
       <h3 className="text-3xl mb-3 leading-snug">

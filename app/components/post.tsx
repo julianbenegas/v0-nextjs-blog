@@ -53,8 +53,9 @@ export function Post({ _title, author, date, coverImage, body }: PostFragment) {
             components={{
               img: (props) => <BodyImage {...props} />,
               pre: ({ code, language }) => (
-                <CodeBlock theme="slack-dark" snippets={[{ code, language }]} />
+                <CodeBlock theme="github-dark-default" snippets={[{ code, language }]} />
               ),
+              li: (props) => <li {...props} className="[&>p]:my-0" />
             }}
           >
             {body.json.content}

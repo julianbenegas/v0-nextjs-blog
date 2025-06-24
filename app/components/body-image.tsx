@@ -10,7 +10,7 @@ export function BodyImage({
   caption?: string | undefined
 }) {
   return (
-    <>
+    <figure>
       <BaseHubImage
         {...props}
         alt={props.caption ?? "Image"}
@@ -21,6 +21,6 @@ export function BodyImage({
       {props.caption && (
         <figcaption className="text-center">{props.caption}</figcaption>
       )}
-    </>
+    </figure>
   )
 }
