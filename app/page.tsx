@@ -3,7 +3,7 @@ import { Intro } from "./components/intro"
 import { HeroPost, PostMetaFragment } from "./components/hero-post"
 import { MoreStories } from "./components/more-stories"
 import { Newsletter } from "./components/newsletter"
-import { Metadata } from "next"
+import type { Metadata } from "next"
 
 export const dynamic = "force-static"
 export const revalidate = 30
@@ -21,13 +21,11 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: data.meta?.title || `BaseHub x v0 Example`,
-    description:
-      data.meta?.description || `This is a blog built with BaseHub and v0.`,
+    description: data.meta?.description || `This is a blog built with BaseHub and v0.`,
     generator: "v0.dev",
     openGraph: {
       title: data.meta?.title || `BaseHub x v0 Example`,
-      description:
-        data.meta?.description || `This is a blog built with BaseHub and v0.`,
+      description: data.meta?.description || `This is a blog built with BaseHub and v0.`,
       images: data.meta?.ogImage?.url
         ? [
             {
@@ -42,8 +40,7 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title: data.meta?.title || `BaseHub x v0 Example`,
-      description:
-        data.meta?.description || `This is a blog built with BaseHub and v0.`,
+      description: data.meta?.description || `This is a blog built with BaseHub and v0.`,
       images: data.meta?.ogImage?.url ? [data.meta.ogImage.url] : [],
     },
   }
