@@ -6,7 +6,6 @@ import { PlaygroundSetupModal } from "./components/playground-notification"
 import "./globals.css"
 import "../basehub.config"
 import { ThemeProvider } from "@/components/theme-provider"
-import "../basehub.config"
 
 export const dynamic = "force-static"
 export const revalidate = 30
@@ -18,7 +17,7 @@ export const metadata = {
 const envs: Record<string, { isValid: boolean; name: string; label: string }> =
   {}
 const _vercel_url_env_name = 'VERCEL_URL'
-const isMainV0 = process.env[_vercel_url_env_name]?.startsWith('preview-blog-kzmp5vwiiwsuu9ucst47')
+const isMainV0 = process.env[_vercel_url_env_name]?.startsWith('preview-blog-kzmndb87ueu1h060pjyr')
 
 let allValid = true
 const subscribeEnv = ({

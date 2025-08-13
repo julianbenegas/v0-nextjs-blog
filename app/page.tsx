@@ -4,6 +4,7 @@ import { HeroPost, PostMetaFragment } from "./components/hero-post"
 import { MoreStories } from "./components/more-stories"
 import { Newsletter } from "./components/newsletter"
 import type { Metadata } from "next"
+import "../basehub.config"
 
 export const dynamic = "force-static"
 export const revalidate = 30
