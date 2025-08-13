@@ -5,7 +5,7 @@ import { basehub } from "basehub"
 import { Post, PostFragment } from "@/app/components/post"
 import { MoreStories } from "@/app/components/more-stories"
 import { PostMetaFragment } from "@/app/components/hero-post"
-import "../../basehub.config"
+import "../../../basehub.config"
 
 export const dynamic = "force-static"
 export const revalidate = 30
